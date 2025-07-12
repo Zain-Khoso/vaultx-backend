@@ -2,11 +2,10 @@
 import express, { Application, Request, Response } from "express";
 import "dotenv/config";
 
-// Database Imports.
+// Local Imports.
 import { connectDB } from "./db";
-
-// Router Imports.
 import authRouter from "./routes/auth";
+import { authenticate } from "./middleware/auth";
 
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
@@ -18,8 +17,8 @@ app.use(express.json());
 app.use("/auth", authRouter);
 
 // Root route.
-app.get("/", async (req: Request, res: Response) => {
-  res.status(200).json({ message: "success" });
+app.get("/", authenticate, async (req: Request, res: Response) => {
+  res.status(200).json({ success: true, message: "User is Authenticated." });
 });
 
 connectDB().then(() =>
