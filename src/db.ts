@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const connectDB = async (): Promise<void> => {
-  const connection = await mongoose.connect(process.env.MONGO_URI!);
+  const connection = await mongoose.connect(process.env.MONGO_URI!, {
+    dbName: "vaultx",
+  });
   console.log(`✅ MongoDB connected: ${connection.connection.host}\n`);
 };
