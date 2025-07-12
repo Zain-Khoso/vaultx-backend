@@ -1,11 +1,16 @@
 // Imports.
-import express, { type Router, type Response, type Request } from "express";
+import express, { Router } from "express";
 
 // Controllers.
-import { registerationController } from "../controllers/authController";
+import {
+  registerationController,
+  loginController,
+} from "../controllers/authController";
 
 const router: Router = express.Router();
 
 router.post("/register", registerationController);
+
+router.post("/login", loginController);
 
 export default router;
